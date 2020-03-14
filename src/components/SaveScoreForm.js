@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useFirebase } from "./firebase/FirebaseContext";
 
-export default function SaveScoreForm({ score }) {
-  const [username, setUsername] = useState('');
+export default function SaveScoreForm({ score, scoreSaved }) {
+  const [username, setUsername] = useState("");
+  const firebase = useFirebase();
 
-  const saveHighScore = (e) => {
+  const saveHighScore = e => {
     e.preventDefault();
     const record = {
       name: username,
       score
-    }
-  }
+    };
+
+    firebase.scores().push(record, () => {
+      console.log("score saved");
+      scoreSaved();
+    });
+  };
 
   return (
     <>
@@ -22,11 +29,15 @@ export default function SaveScoreForm({ score }) {
           id="username"
           placeholder="your username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={e => setUsername(e.target.value)}
         />
-        <button type="submit" className="btn" disabled={!username}>Save</button>
+        <button type="submit" className="btn" disabled={!username}>
+          Save
+        </button>
       </form>
-      <Link className="back" to="/">Go Home</Link>
+      <Link className="back" to="/">
+        Go Home
+      </Link>
     </>
-  )
+  );
 }

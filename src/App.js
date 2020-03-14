@@ -1,12 +1,11 @@
-import React from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
-import './App.css';
-import Home from './components/Home';
-import Game from './components/Game';
-import HighScores from './components/HighScores';
+import React from "react";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import Home from "./components/Home";
+import Game from "./components/Game";
+import HighScores from "./components/HighScores";
 
 function App() {
-  console.log(process.env.REACT_APP_API_KEY);
   return (
     <Router>
       <div className="container">
