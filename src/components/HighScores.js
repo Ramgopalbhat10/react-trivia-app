@@ -27,7 +27,7 @@ export default function HighScores() {
 
     return scores
       .sort((score1, score2) => score2.score - score1.score)
-      .slice(0, 10);
+      .slice(0, 5);
   };
 
   return (
